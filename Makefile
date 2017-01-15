@@ -4,9 +4,9 @@
 #       binary without any dependencies on the host system's version of glibc.
 
 # Directory in which to install Vim
-INSTALLDIR=$(HOME)/vim
+INSTALLDIR=$(HOME)/.vim/static
 # Folder in $PATH where symlinks to the executables are placed.
-BINDIR=$(HOME)/bin
+BINDIR=$(HOME)/.bin
 # Extension to use when creating a compressed, distributable archive.
 DISTEXTENSION=tar.bz2
 
@@ -43,7 +43,7 @@ update: $(SRCDEP)
 
 vim-src/src/auto/config.status: $(SRCDEP)
 	cd vim-src && \
-	CFLAGS="-DFEAT_CONCEAL=1" LDFLAGS="-static" ./configure \
+	CFLAGS="-fPIE -DFEAT_CONCEAL=1" LDFLAGS="-static" ./configure \
 		--prefix=/dev/null/SET_THE_VIMRUNTIME_ENVIRONMENT_VARIABLE \
 		--disable-channel \
 		--disable-gpm \
@@ -57,7 +57,10 @@ vim-src/src/auto/config.status: $(SRCDEP)
 		--disable-xsmp \
 		--enable-multibyte \
 		--with-features=normal \
-		--without-x
+		--without-x \
+		--enable-perlinterp \
+		--enable-pythoninterp \
+	LDFLAGS="-pie"
 
 vim-src/.config.h-modified: vim-src/src/auto/config.status
 	@echo 'Modifying available features:'
