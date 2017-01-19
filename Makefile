@@ -56,7 +56,7 @@ vim-src/src/auto/config.status: $(SRCDEP)
 		--disable-sysmouse \
 		--disable-xsmp \
 		--enable-multibyte \
-		--with-features=normal \
+		--with-features=huge \
 		--without-x \
 		--enable-perlinterp \
 		--enable-pythoninterp \
