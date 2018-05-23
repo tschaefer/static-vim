@@ -43,9 +43,8 @@ update: $(SRCDEP)
 
 vim-src/src/auto/config.status: $(SRCDEP)
 	cd vim-src && \
-	CFLAGS="-fPIE -DFEAT_CONCEAL=1" LDFLAGS="-static" ./configure \
+	CFLAGS="-fPIE -DFEAT_CONCEAL=1" LDFLAGS="-static -pie" ./configure \
 		--prefix=/dev/null/SET_THE_VIMRUNTIME_ENVIRONMENT_VARIABLE \
-		--disable-channel \
 		--disable-gpm \
 		--disable-gtktest \
 		--disable-gui \
@@ -60,7 +59,8 @@ vim-src/src/auto/config.status: $(SRCDEP)
 		--without-x \
 		--enable-perlinterp \
 		--enable-pythoninterp \
-	LDFLAGS="-pie"
+		--enable-channel \
+		--enable-terminal
 
 vim-src/.config.h-modified: vim-src/src/auto/config.status
 	@echo 'Modifying available features:'
