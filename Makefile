@@ -57,10 +57,9 @@ vim-src/src/auto/config.status: $(SRCDEP)
 		--enable-multibyte \
 		--with-features=huge \
 		--without-x \
-		--enable-perlinterp \
-		--enable-pythoninterp \
 		--enable-channel \
-		--enable-terminal
+		--enable-terminal \
+		--enable-cscope
 
 vim-src/.config.h-modified: vim-src/src/auto/config.status
 	@echo 'Modifying available features:'
